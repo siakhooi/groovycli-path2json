@@ -1,0 +1,24 @@
+name: Build and Test on Push
+on:
+  push:
+    branches:
+      - "*"
+  workflow_call:
+    secrets:
+      SONAR_TOKEN:
+        required: true
+
+jobs:
+  gradle-build:
+    uses: ./.github/workflows/gradle-build.yml
+  sonarcloud:
+    needs: gradle-build
+    uses: ./.github/workflows/quality-sonarcloud.yml
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  bats-test-deb:
+    needs: gradle-build
+    uses: ./.github/workflows/bats-test-in-ubuntu.yml
+  bats-test-rpm:
+    needs: gradle-build
+    uses: ./.github/workflows/bats-test-in-fedora.yml

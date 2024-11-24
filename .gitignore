@@ -1,0 +1,14 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+*.deb
+*.sha256sum
+*.sha512sum
+*.rpm
+
+path2json/bin
+bats-test-result*.log
+test_helper

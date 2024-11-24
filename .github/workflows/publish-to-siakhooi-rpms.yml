@@ -1,0 +1,21 @@
+name: Publish to siakhooi.github.io/rpms
+
+on:
+  workflow_call:
+    secrets:
+      PUBLISH_TO_GITHUB_REPO_TOKEN:
+        required: true
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: rpm-deliverables
+          path: ./
+      - run: ./.github/bin/deploy-to-siakhooi-rpms.sh
+        env:
+          PUBLISH_TO_GITHUB_REPO_TOKEN: ${{ secrets.PUBLISH_TO_GITHUB_REPO_TOKEN }}

@@ -1,0 +1,21 @@
+name: Publish to siakhooi.github.io/apt
+
+on:
+  workflow_call:
+    secrets:
+      PUBLISH_TO_GITHUB_REPO_TOKEN:
+        required: true
+
+jobs:
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: deb-deliverables
+          path: ./
+      - run: ./.github/bin/deploy-to-siakhooi-apt.sh
+        env:
+          PUBLISH_TO_GITHUB_REPO_TOKEN: ${{ secrets.PUBLISH_TO_GITHUB_REPO_TOKEN }}
