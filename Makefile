@@ -42,4 +42,7 @@ run:
 runjar:
 	java -jar app/build/libs/app-all.jar
 
+upgrade-gradlew:
+	./gradlew wrapper --gradle-version latest
+
 .PHONY: build
