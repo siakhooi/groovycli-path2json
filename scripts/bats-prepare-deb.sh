@@ -10,5 +10,9 @@ fi
 apt install -y bats
 apt install -y ./"$deb_file"
 
-git clone --separate-git-dir="$(mktemp -u)" https://github.com/bats-core/bats-support.git test_helper/bats-support && rm test_helper/bats-support/.git
+if [[ ! -d test_helper/bats-support ]]; then
+  git clone --separate-git-dir="$(mktemp -u)" https://github.com/bats-core/bats-support.git test_helper/bats-support && rm test_helper/bats-support/.git
+fi
+if [[ ! -d test_helper/bats-assert ]]; then
 git clone --separate-git-dir="$(mktemp -u)" https://github.com/bats-core/bats-assert.git test_helper/bats-assert && rm test_helper/bats-assert/.git
+fi

@@ -5,7 +5,8 @@ setup() {
 }
 
 
-@test "echo" {
+@test "basic" {
+    cd /tmp
     run path2json
-    assert_output 'Hello Groovy (and Sonar??)!!!'
+    assert_output '{Path: "/tmp"}'
 }

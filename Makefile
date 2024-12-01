@@ -41,3 +41,5 @@ run:
 	./gradlew run
 runjar:
 	java -jar app/build/libs/app-all.jar
+
+.PHONY: build
