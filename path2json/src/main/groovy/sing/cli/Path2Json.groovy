@@ -1,15 +1,23 @@
 package sing.cli
+import groovy.json.JsonBuilder
 
 class Path2Json {
-    String getPath(path){
-        return "{Path: \"$path\"}"
+    MyPath traverse(path){
+        return new MyPath(path: path)
+    }
+    void printPath(myPath){
+    print(new JsonBuilder(myPath).toPrettyString())
     }
     void run(path) {
-        println(getPath(path))
+        printPath(traverse(path))
     }
 
     static void main(String[] args) {
         def currentPath=System.getProperty("user.dir")
         (new Path2Json()).run(currentPath)
     }
+}
+
+class MyPath {
+    def path
 }

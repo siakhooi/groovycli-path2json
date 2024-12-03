@@ -1,4 +1,4 @@
 #!/bin/bash
 
-readonly VERSION=0.1.0
+readonly VERSION=0.2.0
 java -jar /usr/share/path2json/path2json-${VERSION}-all.jar "$@"

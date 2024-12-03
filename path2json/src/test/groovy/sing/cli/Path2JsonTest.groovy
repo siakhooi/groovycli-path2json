@@ -1,17 +1,20 @@
 package sing.cli
 
+import groovy.json.JsonBuilder
 import spock.lang.Specification
 
 class Path2JsonTest extends Specification {
-    def "getPath return json"() {
+    def "traverse return json"() {
         setup:
         def app = new Path2Json()
 
         when:
-        def result = app.getPath("/tmp")
+        def result = app.traverse("/tmp")
 
         then:
-        result == "{Path: \"/tmp\"}"
+        def actual=(new JsonBuilder(result)).toString()
+        def expected=(new JsonBuilder(path: "/tmp")).toString()
+        actual == expected
     }
     def "run() print correctly"() {
         setup:
@@ -23,7 +26,7 @@ class Path2JsonTest extends Specification {
         app.run("/tmp")
 
         then:
-         buffer.toString() == "{Path: \"/tmp\"}\n"
+        buffer.toString() == "{\n    \"path\": \"/tmp\"\n}"
     }
     def "main print correctly"() {
         setup:
@@ -35,6 +38,6 @@ class Path2JsonTest extends Specification {
         Path2Json.main()
 
         then:
-        buffer.toString() == "{Path: \"$currentPath\"}\n"
+        buffer.toString() == "{\n    \"path\": \"$currentPath\"\n}"
     }
 }
