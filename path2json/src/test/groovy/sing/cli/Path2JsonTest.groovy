@@ -26,7 +26,7 @@ class Path2JsonTest extends Specification {
         app.run("/tmp")
 
         then:
-        buffer.toString() == "{\n    \"path\": \"/tmp\"\n}"
+        buffer.toString() == "{\"path\":\"/tmp\"}"
     }
     def "main print correctly"() {
         setup:
@@ -38,6 +38,6 @@ class Path2JsonTest extends Specification {
         Path2Json.main()
 
         then:
-        buffer.toString() == "{\n    \"path\": \"$currentPath\"\n}"
+        buffer.toString() == "{\"path\":\"$currentPath\"}"
     }
 }

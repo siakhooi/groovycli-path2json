@@ -1,4 +1,4 @@
-verify: clean build deb
+verify: clean build deb bats-prepare-deb bats-run
 
 set-version:
 	scripts/set-version.sh
@@ -32,7 +32,7 @@ bats-run:
 
 clean:
 	 ./gradlew clean
-	 rm -f *.deb *.sha256sum *.sha512sum *.rpm
+	 rm -rf *.deb *.sha256sum *.sha512sum *.rpm bats-test-result-*.log .gradle build path2json/bin
 build:
 	./gradlew build
 sonar:
