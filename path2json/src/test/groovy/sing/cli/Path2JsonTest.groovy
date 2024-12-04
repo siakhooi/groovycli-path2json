@@ -12,9 +12,9 @@ class Path2JsonTest extends Specification {
         def result = app.traverse("/tmp")
 
         then:
-        def actual=(new JsonBuilder(result)).toString()
-        def expected=(new JsonBuilder(path: "/tmp")).toString()
-        actual == expected
+        def expected=[isDirectory: true, path: "/tmp"]
+        result.isDirectory == expected.isDirectory
+        result.path == expected.path
     }
     def "run() print correctly"() {
         setup:
@@ -26,7 +26,7 @@ class Path2JsonTest extends Specification {
         app.run("/tmp")
 
         then:
-        buffer.toString() == "{\"path\":\"/tmp\"}"
+        buffer.toString() == "{\"isDirectory\":true,\"path\":\"/tmp\"}"
     }
     def "main print correctly"() {
         setup:
@@ -38,6 +38,6 @@ class Path2JsonTest extends Specification {
         Path2Json.main()
 
         then:
-        buffer.toString() == "{\"path\":\"$currentPath\"}"
+        buffer.toString() == "{\"isDirectory\":true,\"path\":\"$currentPath\"}"
     }
 }
