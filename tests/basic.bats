@@ -2,8 +2,7 @@ setup() {
     load 'common-setup'
     common_setup
 
-    outputExpected=$BATS_TEST_FILENAME.$BATS_TEST_DESCRIPTION.expected
-
+    outputExpected=$BATS_TEST_FILENAME.$BATS_TEST_DESCRIPTION.expected.json
 }
 
 @test "basic" {
@@ -11,7 +10,7 @@ setup() {
     cd "$tempDir"
     run path2json
 
-    cat $outputExpected |sed "s:TEMPDIR:${tempDir}:" | assert_output
+    cat $outputExpected | sed "s:TEMPDIR:${tempDir}:" | assert_output
 }
 @test "subdirectories" {
     tempDir=$(mktemp -d)
@@ -21,5 +20,5 @@ setup() {
     touch a/b/e
     run path2json
 
-    cat $outputExpected |sed "s:TEMPDIR:${tempDir}:" | assert_output
+    cat $outputExpected | sed "s:TEMPDIR:${tempDir}:g" | assert_output
 }

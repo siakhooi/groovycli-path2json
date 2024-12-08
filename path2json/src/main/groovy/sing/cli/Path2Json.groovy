@@ -10,9 +10,15 @@ class Path2Json {
         Path file = Paths.get(path)
         def children = []
         def isDirectory
+        def isOther
+        def isRegularFile
+        def isSymbolicLink
         try{
             BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class)
             isDirectory=attr.isDirectory()
+            isOther=attr.isOther()
+            isRegularFile=attr.isRegularFile()
+            isSymbolicLink=attr.isSymbolicLink()
             if (isDirectory) {
                 Files.list(file).each {
                     children << traverse(it.toString())
@@ -21,7 +27,14 @@ class Path2Json {
         }catch(Exception e){
             System.err.println("Error ${file}: ${e.message}")
         }
-        return new MyPath(path: path, isDirectory: isDirectory, children: children)
+        return new MyPath(
+            path: path,
+            isDirectory: isDirectory,
+            isOther: isOther,
+            isRegularFile:isRegularFile,
+            isSymbolicLink:isSymbolicLink,
+            children: children
+        )
     }
     void printPath(myPath){
         print(JsonOutput.toJson(myPath))
@@ -39,5 +52,8 @@ class Path2Json {
 class MyPath {
     def path
     def isDirectory
+    def isOther
+    def isRegularFile
+    def isSymbolicLink
     def children=[]
 }

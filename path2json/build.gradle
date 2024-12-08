@@ -67,7 +67,7 @@ task buildAppDeb(type: Deb) {
 
         into '/usr'
 
-        from("build/libs/path2json-0.6.1-all.jar") {
+        from("build/libs/path2json-0.7.0-all.jar") {
             into 'share/path2json'
         }
 
@@ -90,7 +90,7 @@ task buildAppRpm(type: Rpm) {
 
     into '/usr'
 
-    from("build/libs/path2json-0.6.1-all.jar") {
+    from("build/libs/path2json-0.7.0-all.jar") {
         into 'share/path2json'
     }
 

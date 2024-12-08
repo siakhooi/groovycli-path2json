@@ -1,1 +1,0 @@
-{"isDirectory":true,"path":"TEMPDIR","children":[{"isDirectory":true,"path":"TEMPDIR/a","children":[{"isDirectory":true,"path":"TEMPDIR/a/b","children":[{"isDirectory":false,"path":"TEMPDIR/a/b/e","children":[]},{"isDirectory":true,"path":"TEMPDIR/a/b/c","children":[{"isDirectory":false,"path":"TEMPDIR/a/b/c/d","children":[]}]}]}]}]}

@@ -13,11 +13,12 @@ class Path2JsonTest extends Specification {
         def tempDirName=tempDir.toString()
 
         when:
-        def result = app.traverse(tempDirName)
+        def actual = app.traverse(tempDirName)
 
         then:
-        def expected="{\"isDirectory\":true,\"path\":\"${tempDirName}\",\"children\":[]}"
-        expected == JsonOutput.toJson(result)
+        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}'
+        def expected=String.format(expectedFormat, "${tempDirName}")
+        expected == JsonOutput.toJson(actual)
     }
     def "run() print correctly"() {
         setup:
@@ -31,7 +32,10 @@ class Path2JsonTest extends Specification {
         app.run(tempDirName)
 
         then:
-        buffer.toString() == "{\"isDirectory\":true,\"path\":\"${tempDirName}\",\"children\":[]}"
+        def actual=buffer.toString()
+        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}'
+        def expected=String.format(expectedFormat, "${tempDirName}")
+        expected == actual
     }
     def "main print correctly"() {
         setup:
@@ -46,7 +50,10 @@ class Path2JsonTest extends Specification {
         Path2Json.main()
 
         then:
-        buffer.toString() == "{\"isDirectory\":true,\"path\":\"$tempDirName\",\"children\":[]}"
+        def actual=buffer.toString()
+        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}'
+        def expected=String.format(expectedFormat, "${tempDirName}")
+        expected == actual
     }
     def "traverse subdirectories"() {
         setup:
@@ -57,16 +64,12 @@ class Path2JsonTest extends Specification {
         Path file1 = Files.createTempFile(sub1, "sub1file_", ".txt")
 
         when:
-        def result = app.traverse(tempDirName)
+        def actual = app.traverse(tempDirName)
 
         then:
-        def expectedObject=[isDirectory: true, path: tempDirName, children: [
-            [isDirectory: true, path: sub1.toString(), children: [
-                [isDirectory: false, path: file1.toString(), children: []]
-            ]]
-        ]]
 
-        def expected=JsonOutput.toJson(expectedObject)
-        expected == JsonOutput.toJson(result)
+        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[{"isDirectory":false,"isRegularFile":true,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}]}]}'
+        def expected=String.format(expectedFormat, "${tempDirName}", "${sub1}", "${file1}")
+        expected == JsonOutput.toJson(actual)
     }
 }
