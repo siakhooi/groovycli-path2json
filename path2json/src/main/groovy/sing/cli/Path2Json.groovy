@@ -8,14 +8,20 @@ import java.nio.file.attribute.BasicFileAttributes
 class Path2Json {
     MyPath traverse(path){
         Path file = Paths.get(path)
-        BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class)
         def children = []
-        if (attr.isDirectory()) {
-            Files.list(file).each {
-                children << traverse(it.toString())
+        def isDirectory
+        try{
+            BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class)
+            isDirectory=attr.isDirectory()
+            if (isDirectory) {
+                Files.list(file).each {
+                    children << traverse(it.toString())
+                }
             }
+        }catch(Exception e){
+            System.err.println("Error ${file}: ${e.message}")
         }
-        return new MyPath(path: path, isDirectory: attr.isDirectory(), children: children)
+        return new MyPath(path: path, isDirectory: isDirectory, children: children)
     }
     void printPath(myPath){
         print(JsonOutput.toJson(myPath))
