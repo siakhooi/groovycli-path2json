@@ -7,7 +7,9 @@ setup() {
 }
 
 @test "basic" {
-    cd /tmp
+    tempDir=$(mktemp -d)
+    cd "$tempDir"
     run path2json
-    assert_output - < $outputExpected
+
+    cat $outputExpected |sed "s:TEMPDIR:${tempDir}:" | assert_output
 }
