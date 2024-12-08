@@ -13,3 +13,13 @@ setup() {
 
     cat $outputExpected |sed "s:TEMPDIR:${tempDir}:" | assert_output
 }
+@test "subdirectories" {
+    tempDir=$(mktemp -d)
+    cd "$tempDir"
+    mkdir -p a/b/c
+    touch a/b/c/d
+    touch a/b/e
+    run path2json
+
+    cat $outputExpected |sed "s:TEMPDIR:${tempDir}:" | assert_output
+}
