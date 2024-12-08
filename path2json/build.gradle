@@ -67,7 +67,7 @@ task buildAppDeb(type: Deb) {
 
         into '/usr'
 
-        from("build/libs/path2json-0.7.0-all.jar") {
+        from("build/libs/path2json-0.7.1-all.jar") {
             into 'share/path2json'
         }
 
@@ -86,11 +86,12 @@ task buildAppRpm(type: Rpm) {
     distribution packageDistribution
     packageDescription 'print path as json'
     packageName 'siakhooi-path2json'
+    release '1'
     requires 'jre-headless'
 
     into '/usr'
 
-    from("build/libs/path2json-0.7.0-all.jar") {
+    from("build/libs/path2json-0.7.1-all.jar") {
         into 'share/path2json'
     }
 
