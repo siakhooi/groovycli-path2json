@@ -61,12 +61,13 @@ task buildAppDeb(type: Deb) {
         url packageUrl
         distribution packageDistribution
         packageDescription 'print path as json'
+        packageName 'siakhooi-path2json'
 
         requires 'default-jre-headless'
 
         into '/usr'
 
-        from("build/libs/path2json-0.4.1-all.jar") {
+        from("build/libs/path2json-0.5.0-all.jar") {
             into 'share/path2json'
         }
 
@@ -84,11 +85,12 @@ task buildAppRpm(type: Rpm) {
     url packageUrl
     distribution packageDistribution
     packageDescription 'print path as json'
+    packageName 'siakhooi-path2json'
     requires 'jre-headless'
 
     into '/usr'
 
-    from("build/libs/path2json-0.4.1-all.jar") {
+    from("build/libs/path2json-0.5.0-all.jar") {
         into 'share/path2json'
     }
 
