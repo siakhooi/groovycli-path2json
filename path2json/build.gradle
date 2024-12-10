@@ -4,7 +4,6 @@
  * This generated file contains a sample Groovy application project to get you started.
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.10.2/userguide/building_java_projects.html in the Gradle documentation.
  */
-
 plugins {
     // Apply the groovy Plugin to add support for Groovy.
     id 'groovy'
@@ -67,7 +66,7 @@ task buildAppDeb(type: Deb) {
 
         into '/usr'
 
-        from("build/libs/path2json-0.7.1-all.jar") {
+        from("build/libs/path2json-0.8.0-all.jar") {
             into 'share/path2json'
         }
 
@@ -91,7 +90,7 @@ task buildAppRpm(type: Rpm) {
 
     into '/usr'
 
-    from("build/libs/path2json-0.7.1-all.jar") {
+    from("build/libs/path2json-0.8.0-all.jar") {
         into 'share/path2json'
     }
 
@@ -111,6 +110,8 @@ java {
 application {
     // Define the main class for the application.
     mainClass = 'sing.cli.Path2Json'
+    group 'sing.cli'
+    version '0.8.0'
 }
 
 tasks.named('test') {

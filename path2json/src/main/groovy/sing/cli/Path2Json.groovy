@@ -13,12 +13,24 @@ class Path2Json {
         def isOther
         def isRegularFile
         def isSymbolicLink
+        def creationTime
+        def creationTimeInMillis
+        def lastAccessTime
+        def lastAccessTimeInMillis
+        def lastModifiedTime
+        def lastModifiedTimeInMillis
         try{
             BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class)
             isDirectory=attr.isDirectory()
             isOther=attr.isOther()
             isRegularFile=attr.isRegularFile()
             isSymbolicLink=attr.isSymbolicLink()
+            creationTime=attr.creationTime().toString()
+            creationTimeInMillis=attr.creationTime().toMillis()
+            lastAccessTime=attr.lastAccessTime().toString()
+            lastAccessTimeInMillis=attr.lastAccessTime().toMillis()
+            lastModifiedTime=attr.lastModifiedTime().toString()
+            lastModifiedTimeInMillis=attr.lastModifiedTime().toMillis()
             if (isDirectory) {
                 Files.list(file).each {
                     children << traverse(it.toString())
@@ -31,8 +43,14 @@ class Path2Json {
             path: path,
             isDirectory: isDirectory,
             isOther: isOther,
-            isRegularFile:isRegularFile,
-            isSymbolicLink:isSymbolicLink,
+            isRegularFile: isRegularFile,
+            isSymbolicLink: isSymbolicLink,
+            creationTime: creationTime,
+            creationTimeInMillis: creationTimeInMillis,
+            lastAccessTime: lastAccessTime,
+            lastAccessTimeInMillis: lastAccessTimeInMillis,
+            lastModifiedTime: lastModifiedTime,
+            lastModifiedTimeInMillis: lastModifiedTimeInMillis,
             children: children
         )
     }
@@ -55,5 +73,11 @@ class MyPath {
     def isOther
     def isRegularFile
     def isSymbolicLink
+    def creationTime
+    def creationTimeInMillis
+    def lastAccessTime
+    def lastAccessTimeInMillis
+    def lastModifiedTime
+    def lastModifiedTimeInMillis
     def children=[]
 }

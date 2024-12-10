@@ -1,9 +1,12 @@
 package sing.cli
 
 import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 import spock.lang.Specification
 import java.nio.file.Files
 import java.nio.file.Path
+import sing.cli.MyPath
+import sing.cli.AssertMyPath
 
 class Path2JsonTest extends Specification {
     def "traverse return json"() {
@@ -16,9 +19,9 @@ class Path2JsonTest extends Specification {
         def actual = app.traverse(tempDirName)
 
         then:
-        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}'
-        def expected=String.format(expectedFormat, "${tempDirName}")
-        expected == JsonOutput.toJson(actual)
+        def expected = new MyPath(path: tempDirName, isDirectory: true, isOther: false,
+        isRegularFile: false, isSymbolicLink: false, children: [])
+        AssertMyPath.comparePath(actual, expected)
     }
     def "run() print correctly"() {
         setup:
@@ -33,9 +36,21 @@ class Path2JsonTest extends Specification {
 
         then:
         def actual=buffer.toString()
-        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}'
-        def expected=String.format(expectedFormat, "${tempDirName}")
-        expected == actual
+        def jsonSlurper = new JsonSlurper()
+        def actualJson = jsonSlurper.parseText(actual)
+
+        actualJson.path == tempDirName
+        actualJson.isDirectory == true
+        actualJson.isOther == false
+        actualJson.isRegularFile == false
+        actualJson.isSymbolicLink == false
+        actualJson.creationTime != null
+        actualJson.creationTimeInMillis != null
+        actualJson.lastAccessTime != null
+        actualJson.lastAccessTimeInMillis != null
+        actualJson.lastModifiedTime != null
+        actualJson.lastModifiedTimeInMillis != null
+        actualJson.children[].size() == 0
     }
     def "main print correctly"() {
         setup:
@@ -51,9 +66,22 @@ class Path2JsonTest extends Specification {
 
         then:
         def actual=buffer.toString()
-        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}'
-        def expected=String.format(expectedFormat, "${tempDirName}")
-        expected == actual
+        def jsonSlurper = new JsonSlurper()
+        def actualJson = jsonSlurper.parseText(actual)
+
+        actualJson.path == tempDirName
+        actualJson.isDirectory == true
+        actualJson.isOther == false
+        actualJson.isRegularFile == false
+        actualJson.isSymbolicLink == false
+        actualJson.creationTime != null
+        actualJson.creationTimeInMillis != null
+        actualJson.lastAccessTime != null
+        actualJson.lastAccessTimeInMillis != null
+        actualJson.lastModifiedTime != null
+        actualJson.lastModifiedTimeInMillis != null
+        actualJson.children[].size() == 0
+
     }
     def "traverse subdirectories"() {
         setup:
@@ -67,9 +95,10 @@ class Path2JsonTest extends Specification {
         def actual = app.traverse(tempDirName)
 
         then:
-
-        def expectedFormat='{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[{"isDirectory":true,"isRegularFile":false,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[{"isDirectory":false,"isRegularFile":true,"path":"%s","isSymbolicLink":false,"isOther":false,"children":[]}]}]}'
-        def expected=String.format(expectedFormat, "${tempDirName}", "${sub1}", "${file1}")
-        expected == JsonOutput.toJson(actual)
+        def fileobj=new MyPath(path: file1, isDirectory: false, isOther: false, isRegularFile: true, isSymbolicLink: false, children: [])
+        def subobj =new MyPath(path: sub1,  isDirectory: true, isOther: false, isRegularFile: false, isSymbolicLink: false,children: [fileobj])
+        def expected = new MyPath(path: tempDir, isDirectory: true, isOther: false, isRegularFile: false, isSymbolicLink: false,
+            children: [subobj])
+        AssertMyPath.comparePath(actual, expected)
     }
 }

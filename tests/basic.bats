@@ -10,7 +10,7 @@ setup() {
     cd "$tempDir"
     run path2json
 
-    cat $outputExpected | sed "s:TEMPDIR:${tempDir}:" | assert_output
+    sed "s:TEMPDIR:${tempDir}:" "$outputExpected" | assert_output
 }
 @test "subdirectories" {
     tempDir=$(mktemp -d)
@@ -20,5 +20,5 @@ setup() {
     touch a/b/e
     run path2json
 
-    cat $outputExpected | sed "s:TEMPDIR:${tempDir}:g" | assert_output
+    sed "s:TEMPDIR:${tempDir}:g" "$outputExpected" | assert_output
 }
