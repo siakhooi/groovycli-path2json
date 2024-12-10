@@ -19,6 +19,7 @@ class Path2Json {
         def lastAccessTimeInMillis
         def lastModifiedTime
         def lastModifiedTimeInMillis
+        def size
         try{
             BasicFileAttributes attr = Files.readAttributes(file, BasicFileAttributes.class)
             isDirectory=attr.isDirectory()
@@ -31,6 +32,7 @@ class Path2Json {
             lastAccessTimeInMillis=attr.lastAccessTime().toMillis()
             lastModifiedTime=attr.lastModifiedTime().toString()
             lastModifiedTimeInMillis=attr.lastModifiedTime().toMillis()
+            size=attr.size()
             if (isDirectory) {
                 Files.list(file).each {
                     children << traverse(it.toString())
@@ -51,6 +53,7 @@ class Path2Json {
             lastAccessTimeInMillis: lastAccessTimeInMillis,
             lastModifiedTime: lastModifiedTime,
             lastModifiedTimeInMillis: lastModifiedTimeInMillis,
+            size: size,
             children: children
         )
     }
@@ -79,5 +82,6 @@ class MyPath {
     def lastAccessTimeInMillis
     def lastModifiedTime
     def lastModifiedTimeInMillis
+    def size
     def children=[]
 }

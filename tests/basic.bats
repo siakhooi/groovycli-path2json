@@ -16,8 +16,8 @@ setup() {
     tempDir=$(mktemp -d)
     cd "$tempDir"
     mkdir -p a/b/c
-    touch a/b/c/d
-    touch a/b/e
+    echo -n '1234' > a/b/c/d
+    echo -n '123' > a/b/e
     run path2json
 
     sed "s:TEMPDIR:${tempDir}:g" "$outputExpected" | assert_output

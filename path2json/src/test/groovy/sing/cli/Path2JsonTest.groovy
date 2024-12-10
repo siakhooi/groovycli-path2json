@@ -90,12 +90,13 @@ class Path2JsonTest extends Specification {
         def tempDirName=tempDir.toString()
         Path sub1 = Files.createTempDirectory(tempDir, "sub1_")
         Path file1 = Files.createTempFile(sub1, "sub1file_", ".txt")
+        new File(file1.toString()).text = "1234"
 
         when:
         def actual = app.traverse(tempDirName)
 
         then:
-        def fileobj=new MyPath(path: file1, isDirectory: false, isOther: false, isRegularFile: true, isSymbolicLink: false, children: [])
+        def fileobj=new MyPath(path: file1, isDirectory: false, isOther: false, isRegularFile: true, isSymbolicLink: false, size: 4, children: [])
         def subobj =new MyPath(path: sub1,  isDirectory: true, isOther: false, isRegularFile: false, isSymbolicLink: false,children: [fileobj])
         def expected = new MyPath(path: tempDir, isDirectory: true, isOther: false, isRegularFile: false, isSymbolicLink: false,
             children: [subobj])
