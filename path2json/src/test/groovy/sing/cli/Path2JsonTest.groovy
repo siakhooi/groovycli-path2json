@@ -9,55 +9,12 @@ import sing.cli.MyPath
 import sing.cli.AssertMyPath
 
 class Path2JsonTest extends Specification {
-    def "traverse return json"() {
-        setup:
-        def app = new Path2Json()
-        Path tempDir = Files.createTempDirectory("test1_");
-        def tempDirName=tempDir.toString()
-
-        when:
-        def actual = app.traverse(tempDirName)
-
-        then:
-        def expected = new MyPath(path: tempDirName, isDirectory: true, isOther: false,
-        isRegularFile: false, isSymbolicLink: false, children: [])
-        AssertMyPath.comparePath(actual, expected)
-    }
-    def "run() print correctly"() {
-        setup:
-        def buffer = new ByteArrayOutputStream()
-        System.out = new PrintStream(buffer)
-        def app = new Path2Json()
-        Path tempDir = Files.createTempDirectory("test2_")
-        def tempDirName=tempDir.toString()
-
-        when:
-        app.run(tempDirName)
-
-        then:
-        def actual=buffer.toString()
-        def jsonSlurper = new JsonSlurper()
-        def actualJson = jsonSlurper.parseText(actual)
-
-        actualJson.path == tempDirName
-        actualJson.isDirectory == true
-        actualJson.isOther == false
-        actualJson.isRegularFile == false
-        actualJson.isSymbolicLink == false
-        actualJson.creationTime != null
-        actualJson.creationTimeInMillis != null
-        actualJson.lastAccessTime != null
-        actualJson.lastAccessTimeInMillis != null
-        actualJson.lastModifiedTime != null
-        actualJson.lastModifiedTimeInMillis != null
-        actualJson.children[].size() == 0
-    }
     def "main print correctly"() {
         setup:
         def buffer = new ByteArrayOutputStream()
         System.out = new PrintStream(buffer)
         def currentPath=System.getProperty("user.dir")
-        Path tempDir = Files.createTempDirectory("test3_")
+        Path tempDir = Files.createTempDirectory("main_")
         def tempDirName=tempDir.toString()
         System.setProperty("user.dir", tempDirName)
 
@@ -81,12 +38,57 @@ class Path2JsonTest extends Specification {
         actualJson.lastModifiedTime != null
         actualJson.lastModifiedTimeInMillis != null
         actualJson.children[].size() == 0
-
     }
+
+    def "run() print correctly"() {
+        setup:
+        def buffer = new ByteArrayOutputStream()
+        System.out = new PrintStream(buffer)
+        def app = new Path2Json()
+        Path tempDir = Files.createTempDirectory("run_")
+        def tempDirName=tempDir.toString()
+
+        when:
+        app.run(tempDirName)
+
+        then:
+        def actual=buffer.toString()
+        def jsonSlurper = new JsonSlurper()
+        def actualJson = jsonSlurper.parseText(actual)
+
+        actualJson.path == tempDirName
+        actualJson.isDirectory == true
+        actualJson.isOther == false
+        actualJson.isRegularFile == false
+        actualJson.isSymbolicLink == false
+        actualJson.creationTime != null
+        actualJson.creationTimeInMillis != null
+        actualJson.lastAccessTime != null
+        actualJson.lastAccessTimeInMillis != null
+        actualJson.lastModifiedTime != null
+        actualJson.lastModifiedTimeInMillis != null
+        actualJson.children[].size() == 0
+    }
+
+    def "traverse return json"() {
+        setup:
+        def app = new Path2Json()
+        Path tempDir = Files.createTempDirectory("traverse_");
+        def tempDirName=tempDir.toString()
+
+        when:
+        def actual = app.traverse(tempDirName)
+
+        then:
+        def expected = new MyPath(path: tempDirName, isDirectory: true, isOther: false,
+        isRegularFile: false, isSymbolicLink: false, children: [])
+        AssertMyPath.comparePath(actual, expected)
+    }
+
     def "traverse subdirectories"() {
         setup:
         def app = new Path2Json()
-        Path tempDir = Files.createTempDirectory("testsub_");
+        Path tempDir = Files.createTempDirectory("traversesub_");
         def tempDirName=tempDir.toString()
         Path sub1 = Files.createTempDirectory(tempDir, "sub1_")
         Path file1 = Files.createTempFile(sub1, "sub1file_", ".txt")

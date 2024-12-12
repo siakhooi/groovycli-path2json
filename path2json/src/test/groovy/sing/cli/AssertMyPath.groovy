@@ -19,5 +19,5 @@ static void comparePath(MyPath actual, MyPath expected) {
     for (int i = 0; i < actual.children.size(); i++) {
         comparePath(actual.children[i], expected.children[i])
     }
-}
+  }
 }
