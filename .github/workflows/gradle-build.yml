@@ -14,31 +14,31 @@ jobs:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
       - run: ./gradlew build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: distributionsZip
           path: |
             ./path2json/build/distributions/path2json-*.zip
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: fatJar
           path: |
             ./path2json/build/libs/path2json-*-all.jar
       - run: ./scripts/build-deb.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: deb-deliverables
           path: |
             ./*.deb
             ./*.deb.*sum
       - run: ./scripts/build-rpm.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: rpm-deliverables
           path: |
             ./*.rpm
             ./*.rpm.*sum
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: build-info
           path: |

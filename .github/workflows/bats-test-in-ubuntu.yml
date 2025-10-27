@@ -15,7 +15,7 @@ jobs:
           path: ./
       - run: sudo ./scripts/bats-prepare-deb.sh
       - run: ./scripts/bats-run.sh
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: bats-test-results-deb
           path: |
