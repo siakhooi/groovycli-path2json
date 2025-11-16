@@ -3,9 +3,9 @@ verify-rpm: clean build rpm bats-prepare-rpm bats-run
 
 set-version:
 	scripts/set-version.sh
-git-commit-and-push:
+commit:
 	scripts/git-commit-and-push.sh
-create-release:
+release:
 	scripts/create-release.sh
 deb:
 	./scripts/build-deb.sh
