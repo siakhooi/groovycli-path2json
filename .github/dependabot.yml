@@ -11,3 +11,9 @@ updates:
       interval: "weekly"
     assignees:
       - "siakhooi"
+  - package-ecosystem: "gradle"
+    directory: "/path2json" # location of your build.gradle
+    schedule:
+      interval: "weekly" # or "daily", "monthly"
+    assignees:
+      - "siakhooi"
