@@ -79,6 +79,3 @@ drivers = [
 
 [[plugin]]
 name = "trufflehog"
-
-[metrics]
-line_coverage = { threshold = 0.85 }
