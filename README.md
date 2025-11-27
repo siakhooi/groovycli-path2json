@@ -23,6 +23,10 @@ print directory structure in json format
 ![GitHub all releases](https://img.shields.io/github/downloads/siakhooi/groovycli-path2json/total?color=33cb56&logo=github)
 ![GitHub Release Date](https://img.shields.io/github/release-date/siakhooi/groovycli-path2json?logo=github)
 
+![Quality-Qlty](https://img.shields.io/badge/Quality-Qlty-purple)
+[![Maintainability](https://qlty.sh/gh/siakhooi/projects/groovycli-path2json/maintainability.svg)](https://qlty.sh/gh/siakhooi/projects/groovycli-path2json)
+[![Code Coverage](https://qlty.sh/gh/siakhooi/projects/groovycli-path2json/coverage.svg)](https://qlty.sh/gh/siakhooi/projects/groovycli-path2json)
+
 ![Quality-Sonar](https://img.shields.io/badge/Quality-SonarCloud-purple)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=siakhooi_groovycli-path2json&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=siakhooi_groovycli-path2json)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=siakhooi_groovycli-path2json&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=siakhooi_groovycli-path2json)
@@ -75,4 +79,5 @@ $ sudo yum install siakhooi-path2json
 
 ### Quality
 
-- SonarCloud: <https://sonarcloud.io/project/overview?id=siakhooi_groovycli-path2json>
+- https://sonarcloud.io/project/overview?id=siakhooi_groovycli-path2json
+- https://qlty.sh/gh/siakhooi/projects/groovycli-path2json
