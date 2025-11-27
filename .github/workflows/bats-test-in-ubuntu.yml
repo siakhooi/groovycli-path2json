@@ -13,6 +13,9 @@ jobs:
         with:
           name: deb-deliverables
           path: ./
+      - run: |
+          sudo apt-get update
+          sudo apt-get upgrade -y
       - run: sudo ./scripts/bats-prepare-deb.sh
       - run: ./scripts/bats-run.sh
       - uses: actions/upload-artifact@v5
