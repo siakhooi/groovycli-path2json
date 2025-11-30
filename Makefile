@@ -41,7 +41,7 @@ sonar:
 run:
 	./gradlew run
 runjar:
-	java -jar app/build/libs/app-all.jar
+	java -jar path2json/build/libs/path2json-1.0.1-all.jar
 
 upgrade-gradlew:
 	./gradlew wrapper --gradle-version latest
