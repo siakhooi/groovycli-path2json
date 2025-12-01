@@ -42,7 +42,8 @@ run:
 	./gradlew run
 runjar:
 	java -jar path2json/build/libs/path2json-1.0.1-all.jar
-
+test:
+	./gradlew test
 upgrade-gradlew:
 	./gradlew wrapper --gradle-version latest
 

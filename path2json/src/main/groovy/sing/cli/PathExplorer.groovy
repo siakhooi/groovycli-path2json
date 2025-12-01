@@ -35,14 +35,7 @@ class PathExplorer {
             size=attr.size()
             if (isDirectory) {
                 def entries = Files.list(file).collect { it }
-                entries.sort { a, b ->
-                    def aIsDir = Files.isDirectory(a)
-                    def bIsDir = Files.isDirectory(b)
-                    if (aIsDir == bIsDir) {
-                        return a.fileName.toString() <=> b.fileName.toString()
-                    }
-                    return aIsDir ? 1 : -1  // files before directories
-                }
+                entries.sort(new PathComparator())
                 entries.each {
                     children << traverse(it.toString())
                 }
