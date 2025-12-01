@@ -12,3 +12,5 @@ build
 path2json/bin
 bats-test-result*.log
 test_helper
+
+*.log

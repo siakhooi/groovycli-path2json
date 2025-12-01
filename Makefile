@@ -1,5 +1,5 @@
-verify-deb: clean build deb bats-prepare-deb bats-run
-verify-rpm: clean build rpm bats-prepare-rpm bats-run
+all-deb: clean set-version build deb bats-prepare-deb bats-run
+all-rpm: clean set-version build rpm bats-prepare-rpm bats-run
 
 set-version:
 	scripts/set-version.sh
