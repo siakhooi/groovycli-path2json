@@ -72,7 +72,9 @@ task buildAppDeb(type: Deb) {
 
         from('src/scripts') {
             into 'bin'
-            fileMode 0755
+            filePermissions {
+                unix 0755
+            }
         }
 }
 // create a task to build rpm file
@@ -96,7 +98,9 @@ task buildAppRpm(type: Rpm) {
 
     from('src/scripts') {
         into 'bin'
-        fileMode 0755
+        filePermissions {
+            unix 0755
+        }
     }
 }
 
