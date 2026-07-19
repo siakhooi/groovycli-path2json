@@ -5,7 +5,7 @@
 groovy-all = "4.0.24"
 guava = "33.3.1-jre"
 junit = "4.13.2"
-spock-core = "2.3-groovy-4.0"
+spock-core = "2.4-groovy-4.0"
 
 [libraries]
 groovy-all = { module = "org.apache.groovy:groovy-all", version.ref = "groovy-all" }
