@@ -54,13 +54,13 @@ dependencies {
 }
 
 task buildAppDeb(type: Deb) {
-        arch 'amd64'
-        maintainer packageMaintainer
-        uploaders packageUploaders
-        url packageUrl
-        distribution packageDistribution
-        packageDescription 'print path as json'
-        packageName 'siakhooi-path2json'
+        arch = 'amd64'
+        maintainer = packageMaintainer
+        uploaders = packageUploaders
+        url = packageUrl
+        distribution = packageDistribution
+        packageDescription = 'print path as json'
+        packageName = 'siakhooi-path2json'
 
         requires 'default-jre-headless'
 
@@ -79,15 +79,15 @@ task buildAppDeb(type: Deb) {
 }
 // create a task to build rpm file
 task buildAppRpm(type: Rpm) {
-    arch 'noarch'
-    os LINUX
-    maintainer packageMaintainer
-    uploaders packageUploaders
-    url packageUrl
-    distribution packageDistribution
-    packageDescription 'print path as json'
-    packageName 'siakhooi-path2json'
-    release '1'
+    arch = 'noarch'
+    os = LINUX
+    maintainer = packageMaintainer
+    uploaders = packageUploaders
+    url = packageUrl
+    distribution = packageDistribution
+    packageDescription = 'print path as json'
+    packageName = 'siakhooi-path2json'
+    release = '1'
     requires 'jre-headless'
 
     into '/usr'
@@ -114,8 +114,8 @@ java {
 application {
     // Define the main class for the application.
     mainClass = 'sing.cli.Path2Json'
-    group 'sing.cli'
-    version '1.0.2'
+    group = 'sing.cli'
+    version = '1.0.2'
 }
 
 tasks.named('test') {
