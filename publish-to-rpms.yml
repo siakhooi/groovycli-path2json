@@ -2,7 +2,7 @@ repo: siakhooi/rpms
 branch: main
 git_commit_user: path2json
 git_commit_email: path2json@siakhooi.github.io
-git_commit_message: "path2json: Auto deploy"
+git_commit_message: "{repo_name}: {ref_name} | {commit_short}"
 
 files:
   - source: siakhooi-path2json-*.noarch.rpm
