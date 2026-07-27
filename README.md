@@ -2,6 +2,37 @@
 
 print directory structure in json format
 
+## Installation
+
+### Ubuntu/Debian
+
+```bash
+$ sudo curl -L https://siakhooi.github.io/apt/siakhooi-apt.list | sudo tee /etc/apt/sources.list.d/siakhooi-apt.list > /dev/null
+$ sudo curl -L https://siakhooi.github.io/apt/siakhooi-apt.gpg  | sudo tee /usr/share/keyrings/siakhooi-apt.gpg > /dev/null
+$ sudo apt update
+
+$ sudo apt install siakhooi-path2json
+```
+
+### Fedora/Red Hat
+
+```bash
+$ sudo curl -L https://siakhooi.github.io/rpms/siakhooi-rpms.repo | sudo tee /etc/yum.repos.d/siakhooi-rpms.repo > /dev/null
+
+$ sudo dnf install siakhooi-path2json
+# or
+$ sudo yum install siakhooi-path2json
+
+```
+## URL
+
+### Quality
+
+- https://sonarcloud.io/project/overview?id=siakhooi_groovycli-path2json
+- https://qlty.sh/gh/siakhooi/projects/path2json
+
+## Badges
+
 ![GitHub](https://img.shields.io/github/license/siakhooi/path2json?logo=github)
 ![GitHub last commit](https://img.shields.io/github/last-commit/siakhooi/path2json?logo=github)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/siakhooi/path2json?logo=github)
@@ -46,37 +77,5 @@ print directory structure in json format
 ![Sonar Violations (short format)](https://img.shields.io/sonar/info_violations/siakhooi_groovycli-path2json?server=https%3A%2F%2Fsonarcloud.io)
 ![Sonar Violations (long format)](https://img.shields.io/sonar/violations/siakhooi_groovycli-path2json?format=long&server=http%3A%2F%2Fsonarcloud.io)
 
-
-[![Generic badge](https://img.shields.io/badge/Funding-BuyMeACoffee-33cb56.svg)](https://www.buymeacoffee.com/siakhooi)
-[![Generic badge](https://img.shields.io/badge/Funding-Ko%20Fi-33cb56.svg)](https://ko-fi.com/siakhooi)
-
+[![Wise](https://img.shields.io/badge/Funding-Wise-33cb56.svg?logo=wise)](https://wise.com/pay/me/siakn3)
 ![visitors](https://hit-tztugwlsja-uc.a.run.app/?outputtype=badge&counter=ghmd-groovycli-path2json)
-
-## Installation
-
-### Ubuntu/Debian
-
-```bash
-$ sudo curl -L https://siakhooi.github.io/apt/siakhooi-apt.list | sudo tee /etc/apt/sources.list.d/siakhooi-apt.list > /dev/null
-$ sudo curl -L https://siakhooi.github.io/apt/siakhooi-apt.gpg  | sudo tee /usr/share/keyrings/siakhooi-apt.gpg > /dev/null
-$ sudo apt update
-
-$ sudo apt install siakhooi-path2json
-```
-
-### Fedora/Red Hat
-
-```bash
-$ sudo curl -L https://siakhooi.github.io/rpms/siakhooi-rpms.repo | sudo tee /etc/yum.repos.d/siakhooi-rpms.repo > /dev/null
-
-$ sudo dnf install siakhooi-path2json
-# or
-$ sudo yum install siakhooi-path2json
-
-```
-## URL
-
-### Quality
-
-- https://sonarcloud.io/project/overview?id=siakhooi_groovycli-path2json
-- https://qlty.sh/gh/siakhooi/projects/path2json
